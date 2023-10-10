@@ -16,11 +16,11 @@ script:
   # style enforcement
   - python -m black --check --diff --color .
   - python -m isort --check --diff .
-  - python -m flake8 .
+  - python -m flake8 src/ tests/
   # static typing
-  - python -m mypy .
+  - python -m mypy src/ tests/
   # test suite
-  - python -m pytest -sv --cov=sac_action_extraction tests
+  - python -m pytest tests
 jobs:
   include:
     - python: 3.8 # in case of single test job we add it here

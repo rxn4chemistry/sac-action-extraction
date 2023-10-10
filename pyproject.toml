@@ -10,6 +10,8 @@ check_untyped_defs = true
 
 [[tool.mypy.overrides]]
 module = [
-    "tqdm.*",
+    "sentencepiece.*",
+    "sklearn.*",
+    "textdistance.*",
 ]
 ignore_missing_imports = true

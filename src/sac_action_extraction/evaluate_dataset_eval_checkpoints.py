@@ -3,20 +3,19 @@ from pathlib import Path
 
 import click
 import pandas as pd
-from action_sequences.paragraph_to_actions.analysis import (
+from paragraph2actions.analysis import (
     action_string_validity,
     full_sentence_accuracy,
     levenshtein_similarity,
     modified_bleu,
     partial_accuracy,
 )
-from action_sequences.utils.onmt.translator_with_sentencepiece import (
-    TranslatorWithSentencePiece,
-)
+from paragraph2actions.default_converters import default_action_converters
+from paragraph2actions.readable_converter import ReadableConverter
+from paragraph2actions.translator import Translator
 from rxn.utilities.files import load_list_from_file
-from rxn_actions.default_converters import default_action_converters
-from rxn_actions.readable_converter import ReadableConverter
-from rxn_actions.sac_converters import default_sac_converters
+
+from .sac_converters import default_sac_converters
 
 
 def load_converter() -> ReadableConverter:
@@ -77,9 +76,7 @@ def main(
         print(f"Evaluating model {model}, checkpoint {checkpoint}")
         exp_dir = Path(f"exp_{model}")
         checkpoint_path = exp_dir / "models" / f"model_lr_0.20_step_{checkpoint}.pt"
-        translator = TranslatorWithSentencePiece(
-            str(checkpoint_path), sentencepiece_model=str(sp_model)
-        )
+        translator = Translator(str(checkpoint_path), sentencepiece_model=str(sp_model))
         preds = translator.translate_sentences(src)
 
         metrics.append(

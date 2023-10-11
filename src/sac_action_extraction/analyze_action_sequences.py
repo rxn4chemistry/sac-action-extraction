@@ -1,10 +1,9 @@
 from typing import List
 
-from action_sequences.paragraph_to_actions.paragraph_translator import (
-    ParagraphTranslator,
-)
-from rxn_actions.actions import Add, MakeSolution, Yield
-from rxn_actions.sac_actions import PostTreatment, SynthesisProduct
+from paragraph2actions.actions import Add, MakeSolution, Yield
+from paragraph2actions.paragraph_translator import ParagraphTranslator
+
+from .sac_actions import PostTreatment, SynthesisProduct
 
 # SAME AS BEFORE
 paragraphs: List[str] = []

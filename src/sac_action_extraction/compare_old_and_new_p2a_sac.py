@@ -4,9 +4,7 @@ import os
 from pathlib import Path
 
 import pandas as pd
-from action_sequences.paragraph_to_actions.paragraph_translator import (
-    ParagraphTranslator,
-)
+from paragraph2actions.paragraph_translator import ParagraphTranslator
 
 from .utils import load_converter
 

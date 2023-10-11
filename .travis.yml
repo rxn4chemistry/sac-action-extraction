@@ -7,11 +7,7 @@ python:
   - 3.8
 
 install:
-  # the PyPI coordinates will change once we get dedicated entitlements
-  - >
-    pip install -e .[dev]
-    --extra-index-url https://${PYPI_USERNAME}:${PYPI_PASSWORD}@eu.artifactory.swg-devops.com/artifactory/api/pypi/res-accelerated-discovery-team-rxn-public-pypi-local/simple
-    --extra-index-url https://${PYPI_USERNAME}:${PYPI_PASSWORD}@eu.artifactory.swg-devops.com/artifactory/api/pypi/res-accelerated-discovery-team-rxn-private-pypi-local/simple
+  - pip install -e .[dev]
 script:
   # style enforcement
   - python -m black --check --diff --color .

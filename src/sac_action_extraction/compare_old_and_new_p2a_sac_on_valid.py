@@ -3,9 +3,7 @@
 import os
 from pathlib import Path
 
-from action_sequences.paragraph_to_actions.paragraph_translator import (
-    ParagraphTranslator,
-)
+from paragraph2actions.paragraph_translator import ParagraphTranslator
 from rxn.utilities.files import iterate_lines_from_file
 from tqdm import tqdm
 

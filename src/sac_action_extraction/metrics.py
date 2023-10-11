@@ -1,7 +1,7 @@
 from typing import Tuple
 
 import click
-from action_sequences.paragraph_to_actions.analysis import (
+from paragraph2actions.analysis import (
     action_string_validity,
     full_sentence_accuracy,
     levenshtein_similarity,

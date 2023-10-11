@@ -29,20 +29,18 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import seaborn as sns
-from action_sequences.utils.notebook_utils import setup_ipython_logger
+from paragraph2actions.actions import Action, InvalidAction, NoAction
+from paragraph2actions.conversion_utils import ActionStringConversionError
+from paragraph2actions.converter_interface import ActionStringConverter
+from paragraph2actions.readable_converter import ReadableConverter
 from rxn.utilities.files import load_list_from_file
-from rxn_actions.action_string_converter import (
-    ActionStringConversionError,
-    ActionStringConverter,
-    ReadableConverter,
-)
-from rxn_actions.actions import Action, InvalidAction, NoAction
+from rxn.utilities.logging import setup_console_logger
 
 from sac_action_extraction.utils import load_converter
 
 # %matplotlib inline
 
-setup_ipython_logger()
+setup_console_logger()
 random.seed(42)
 
 # Define file locations

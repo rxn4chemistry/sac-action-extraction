@@ -3,13 +3,8 @@ from pathlib import Path
 from typing import List, Tuple
 
 import click
-from action_sequences.paragraph_to_actions.analysis import (
-    levenshtein_similarity,
-    partial_accuracy,
-)
-from action_sequences.utils.onmt.translator_with_sentencepiece import (
-    TranslatorWithSentencePiece,
-)
+from paragraph2actions.analysis import levenshtein_similarity, partial_accuracy
+from paragraph2actions.translator import Translator
 from rxn.utilities.files import load_list_from_file
 from rxn.utilities.logging import setup_console_logger
 
@@ -64,9 +59,7 @@ def main(
     for model_dir in model_dirs:
         for model in model_dir.glob("*.pt"):
             logger.info(f"Evaluating model: {model}")
-            translator = TranslatorWithSentencePiece(
-                str(model), sentencepiece_model=str(sp_model)
-            )
+            translator = Translator(str(model), sentencepiece_model=str(sp_model))
             preds = translator.translate_sentences(src)
 
             similarity = levenshtein_similarity(tgt, preds)

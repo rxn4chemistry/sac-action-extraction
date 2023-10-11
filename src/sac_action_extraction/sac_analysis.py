@@ -2,26 +2,19 @@ import collections
 from pathlib import Path
 from typing import Counter
 
-from action_sequences.paragraph_to_actions.paragraph_translator import (
-    ParagraphTranslator,
-)
-from rxn_actions.biomass_converters import default_biomass_converters
-from rxn_actions.default_converters import default_action_converters
-from rxn_actions.sac_actions import Stir
-from rxn_actions.sac_converters import default_sac_converters
-from rxn_actions.utils import extract_compound_names, extract_temperatures
+from paragraph2actions.default_converters import default_action_converters
+from paragraph2actions.paragraph_translator import ParagraphTranslator
+from paragraph2actions.utils import extract_compound_names, extract_temperatures
 
+from .sac_actions import Stir
+from .sac_converters import default_sac_converters
 from .utils import load_converter
 
 init_dir = Path("/Users/ava/Documents/client_projects/ace_eth/20220902_retraining")
 model = init_dir / "model_lr_0.20_step_9000.pt"
 sp_model = init_dir / "original_models" / "sp_model.model"
 
-single_action_converters = (
-    default_sac_converters()
-    + default_action_converters()
-    + default_biomass_converters()
-)
+single_action_converters = default_sac_converters() + default_action_converters()
 converter = load_converter()
 
 paragraph_translator = ParagraphTranslator(

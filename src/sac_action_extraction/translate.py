@@ -8,12 +8,10 @@ from typing import Tuple
 
 import click
 import sentencepiece  # noqa: must be imported before torch to avoid problems on the cluster.
-from action_sequences.utils.misc import setup_basic_logger
-from action_sequences.utils.onmt.translator_with_sentencepiece import (
-    TranslatorWithSentencePiece,
-)
+from paragraph2actions.translator import Translator
 from rxn.onmt_utils.torch_utils import set_num_threads
 from rxn.utilities.files import dump_list_to_file, load_list_from_file
+from rxn.utilities.logging import setup_console_logger
 
 logger = logging.getLogger(__name__)
 logger.addHandler(logging.NullHandler())
@@ -45,10 +43,10 @@ def translate_actions(
     This script, in addition to the OpenNMT translation, adds pre-processing and
     post-processing in the form of tokenization and de-tokenization with sentencepiece.
     """
-    setup_basic_logger()
+    setup_console_logger()
     set_num_threads(num_threads)
 
-    translator = TranslatorWithSentencePiece(
+    translator = Translator(
         translation_model=translation_models, sentencepiece_model=sentencepiece_model
     )
 

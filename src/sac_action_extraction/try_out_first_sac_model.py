@@ -5,9 +5,7 @@ from pathlib import Path
 from typing import TextIO
 
 import click
-from action_sequences.paragraph_to_actions.paragraph_translator import (
-    ParagraphTranslator,
-)
+from paragraph2actions.paragraph_translator import ParagraphTranslator
 
 from .utils import load_converter
 

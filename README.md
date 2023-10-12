@@ -7,6 +7,7 @@ This repository contains the code for [Language models and protocol standardizat
 - [Installation Guide](#installation-guide)
 - [Data preparation](#data-preparation)
 - [Training](#training)
+- [Model use, evaluation, and comparison](#model-use-evaluation-and-comparison)
 
 # Overview
 
@@ -160,3 +161,33 @@ onmt_train \
 ```
 This training script will take on the order of one hour to execute on one GPU, and will create model checkpoints in `$DATA_DIR/models`.
 The learning rate and other parameters may be tuned; the values given here provided the best validation accuracy.
+
+
+# Model use, evaluation, and comparison
+
+The trained models compared in the publication can be downloaded from [this link](https://huggingface.co/spaces/rxn4chemistry/synthesis-protocol-extraction/tree/main).
+
+## Action extraction
+
+The following command allows you to make predictions with all three models (you may need to adapt the paths).
+```bash
+paragraph2actions-translate -s src-test.txt -o pred-ace.txt        -p sp_model.model -t sac.pt
+paragraph2actions-translate -s src-test.txt -o pred-organic.txt    -p sp_model.model -t organic-1.pt -t organic-2.pt -t organic-3.pt
+paragraph2actions-translate -s src-test.txt -o pred-pretrained.txt -p sp_model.model -t pretrained.pt
+```
+
+## Metrics
+
+To compute the metrics and produce a CSV comparing the models, execute the following:
+```bash
+sac-metrics-grid -g tgt-test.txt -p pred-ace.txt -p pred-organic.txt -p pred-pretrained.txt -o metrics.csv
+```
+It will create the file `metrics.csv` with the metrics.
+
+## Analysis of extracted actions
+
+[`interactive_analysis.py`](./notebooks/interactive_analysis.py) illustrates, in an interactive manner, how one can gain insight into the model predictions.
+To run it as an IPython notebook, run the following command to create `interactive_analysis.ipynb` (after installing `jupytext` from PyPI):
+```bash
+jupytext --set-format py,ipynb notebooks/interactive_analysis.py
+```

@@ -2,10 +2,14 @@ import collections
 from typing import Counter
 
 from paragraph2actions.paragraph_translator import ParagraphTranslator
+from paragraph2actions.sentence_splitting.cde_splitter import CdeSplitter
 from paragraph2actions.utils import extract_compound_names, extract_temperatures
+from rxn.utilities.logging import setup_console_logger
 
 from sac_action_extraction.sac_actions import Stir
 from sac_action_extraction.utils import load_converter
+
+setup_console_logger()
 
 model = "sac.pt"
 sp_model = "sp_model.model"
@@ -15,6 +19,7 @@ converter = load_converter()
 paragraph_translator = ParagraphTranslator(
     translation_model=model,
     sentencepiece_model=sp_model,
+    sentence_splitter=CdeSplitter(),
     action_string_converter=converter,
 )
 

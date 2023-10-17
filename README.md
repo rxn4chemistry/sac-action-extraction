@@ -176,6 +176,11 @@ paragraph2actions-translate -s src-test.txt -o pred-organic.txt    -p sp_model.m
 paragraph2actions-translate -s src-test.txt -o pred-pretrained.txt -p sp_model.model -t pretrained.pt
 ```
 
+It is also possible to do interactive predictions from the command-line with the following:
+```bash
+paragraph2actions-translate -s sp_model.model -m sac.pt
+```
+
 ## Metrics
 
 To compute the metrics and produce a CSV comparing the models, execute the following:
